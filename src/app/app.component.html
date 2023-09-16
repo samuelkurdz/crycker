@@ -1,3 +1,25 @@
-<p class="text-green-700">
-	{{ title }}
-</p>
+<nav
+  class="w-screen fixed bg-transparent top-4 left-0 flex justify-center items-center"
+>
+  <div class="border rounded-lg py-2.5 px-4 flex items-center gap-10">
+    <h2 class="uppercase font-bold text-green-700">Crycker</h2>
+    <div class="flex items-center gap-5">
+      <a
+        href="home"
+        class="text-sm hover:text-blue-500 hover:underline hover:underline-offset-4 transition-all"
+      >
+        Home
+      </a>
+      <a
+        href="favourites"
+        class="text-sm hover:text-blue-500 hover:underline hover:underline-offset-4 transition-all"
+      >
+        Favourites
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="mt-20 px-4 lg:px-10">
+  <router-outlet />
+</main>
