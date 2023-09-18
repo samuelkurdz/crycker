@@ -8,15 +8,15 @@ import { provideEffects } from '@ngrx/effects';
 import { routes } from './app.routes';
 import { reducers, metaReducers } from './store/app.reducer';
 import { headerInterceptor } from './interceptors/header.interceptor';
-import * as assetsEffects from './store/assets/assets.effects'
+import * as assetsEffects from './store/assets/assets.effects';
+import { provideAnimations } from '@angular/platform-browser/animations'
 
 export const appConfig: ApplicationConfig = {
 	providers: [
-		provideRouter(routes),
-		provideStore(reducers, { metaReducers }),
-		provideEffects(assetsEffects),
-		provideHttpClient(
-			withInterceptors([headerInterceptor])
-		)
-	]
+    provideRouter(routes),
+    provideStore(reducers, { metaReducers }),
+    provideEffects(assetsEffects),
+    provideHttpClient(withInterceptors([headerInterceptor])),
+    provideAnimations()
+]
 };

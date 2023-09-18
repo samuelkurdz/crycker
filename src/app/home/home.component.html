@@ -1,1 +1,16 @@
-<app-assets-table />
+<section class="space-y-4">
+  <div class="flex items-center gap-3">
+    <label for="filter">Search:</label>
+    <input
+      id="filter"
+      placeholder="Find assets..."
+      [formControl]="filterInputControl"
+      class="flex rounded border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder: focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[250px]"
+    />
+  </div>
+
+  <app-assets-table
+    [tableAssets]="assets()"
+    [isTableDataLoading]="isAssetsLoading()"
+  ></app-assets-table>
+</section>

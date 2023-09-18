@@ -5,9 +5,9 @@ const selectStore = (state: AppState) => {
   return state.assets;
 };
 
-export const selectCryptoAssets = createSelector(
+export const selectAssets = createSelector(
   selectStore,
-  (state) => state.currencies
+  (state) => state.cryptoAssets
 );
 
 export const selectIsFirstTimeVisit = createSelector(
@@ -18,4 +18,9 @@ export const selectIsFirstTimeVisit = createSelector(
 export const selectIsAssetsLoading = createSelector(
   selectStore,
   (state) => state.isLoadingAssets
+);
+
+export const selectFavouriteAssets = createSelector(
+  selectStore,
+  (state) => state.favoriteAssets
 );

@@ -21,7 +21,7 @@ function localStorageSyncReducer(
 	reducer: ActionReducer<AppState>,
 ): ActionReducer<AppState> {
 	return localStorageSync({
-		keys: [{ assets: ['isFirstTimeVisit', 'favorites'] }],
+		keys: [{ assets: ['isFirstTimeVisit', 'favoriteAssets'] }],
 		rehydrate: true,
 	})(reducer);
 }

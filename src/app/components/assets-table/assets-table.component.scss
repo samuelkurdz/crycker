@@ -1,0 +1,15 @@
+:host {
+	display: block;
+}
+
+[role="columnheader"] {
+	@apply whitespace-nowrap uppercase
+}
+
+[role="cell"] {
+	@apply whitespace-nowrap
+}
+
+[mat-header-row] {
+	@apply bg-gray-100 font-bold text-sm
+}

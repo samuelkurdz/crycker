@@ -1,33 +1,32 @@
 import { inject } from '@angular/core';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
-import {
-	catchError,
-	exhaustMap,
-	map,
-	switchMap,
-} from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import * as assetsActions from './assets.actions';
 import { DataService } from 'src/app/data.service';
+import { selectFavouriteAssets } from './assets.selectors';
+import { Store } from '@ngrx/store';
 
 
 export const getAssets = createEffect(
 	(
 		actions$ = inject(Actions),
-		dataService = inject(DataService)
+		_dataService = inject(DataService),
+		_store = inject(Store)
 	) => {
 		return actions$.pipe(
 			ofType(assetsActions.fetchAssets),
-			switchMap(() =>
-				dataService.fetchCurrenciesData().pipe(
+			concatLatestFrom(() => _store.select(selectFavouriteAssets)),
+			switchMap(([action, favAssets]) =>
+				_dataService.fetchCurrenciesData().pipe(
 					map((assets) => {
-						console.log(assets);
-						return assetsActions.cryptoAssetsLoaded({ payload: assets })
+						return assets.map((asset) => ({
+							...asset,
+							isFav: favAssets.some(favAsset => favAsset.asset_id === asset.asset_id)
+						}))
 					}),
-					catchError((error) =>
-						// of(UsersApiActions.usersLoadedFailure({ error }))
-						of(assetsActions.cryptoAssetsLoaded({ payload: [] }))
-					)
+					map((assets) => assetsActions.cryptoAssetsLoaded({ payload: assets })),
+					catchError((error) => of(assetsActions.assetsLoadedFailure()))
 				)
 			)
 		);

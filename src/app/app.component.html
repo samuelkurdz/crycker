@@ -5,14 +5,17 @@
     <h2 class="uppercase font-bold text-green-700">Crycker</h2>
     <div class="flex items-center gap-5">
       <a
-        href="home"
-        class="text-sm hover:text-blue-500 hover:underline hover:underline-offset-4 transition-all"
+        routerLink=""
+        routerLinkActive="text-blue-500 underline underline-offset-4"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-sm hover:text-blue-500 transition-all"
       >
         Home
       </a>
       <a
-        href="favourites"
-        class="text-sm hover:text-blue-500 hover:underline hover:underline-offset-4 transition-all"
+        routerLink="favourites"
+        routerLinkActive="text-blue-500 underline underline-offset-4"
+        class="text-sm hover:text-blue-500 transition-all"
       >
         Favourites
       </a>

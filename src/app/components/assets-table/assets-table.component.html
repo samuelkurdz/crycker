@@ -1,0 +1,118 @@
+<div
+  style="max-height: calc(100vh - 300px)"
+  class="overflow-x-auto bg-white rounded overflow-y-auto relative border"
+>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="border-collapse table-auto w-full whitespace-no-wrap relative"
+  >
+    <ng-container matColumnDef="fav">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let item">
+        <svg
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="cursor-pointer w-5 h-5 stroke-green-500"
+          [ngClass]="item.isFav ? 'fill-green-500' : 'fill-none'"
+          (click)="toggleFavourite(item)"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+          />
+        </svg>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let item" class="space-x-2">
+        <span class="font-semibold">{{ item.name }}</span>
+        <span class="text-gray-400 font-medium text-xs">
+          {{ item.asset_id }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="volume_1hrs_usd">
+      <th mat-header-cell *matHeaderCellDef>1hr vol</th>
+      <td mat-cell *matCellDef="let item">
+        {{ item.volume_1hrs_usd | currency : "USD" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="volume_1day_usd">
+      <th mat-header-cell *matHeaderCellDef>24hr vol</th>
+      <td mat-cell *matCellDef="let item">
+        {{ item.volume_1day_usd | currency : "USD" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="volume_1mth_usd">
+      <th mat-header-cell *matHeaderCellDef>1month vol</th>
+      <td mat-cell *matCellDef="let item">
+        {{ item.volume_1mth_usd | currency : "USD" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price_usd">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let item">
+        {{ item.price_usd | currency : "USD" }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <ng-container *matNoDataRow>
+      <ng-container *ngIf="isTableDataLoading">
+        <ng-container *ngTemplateOutlet="tableLoader"></ng-container>
+      </ng-container>
+      <td
+        colspan="6"
+        *ngIf="!isTableDataLoading"
+        class="py-3 font-bold text-center"
+      >
+        No assets found
+      </td>
+    </ng-container>
+  </table>
+</div>
+<mat-paginator
+  showFirstLastButtons
+  [length]="tableAssets.length"
+  (page)="handlePagination()"
+  [pageSizeOptions]="[5, 10, 25, 50]"
+  aria-label="Select page of periodic elements"
+>
+</mat-paginator>
+
+<ng-template #tableLoader>
+  <tr
+    *ngFor="let item of [1, 2, 3, 4, 5]"
+    class="border-gray-200 border-b transition-colors hover:bg-gray-100 text-left"
+  >
+    <td class="py-2 px-6">
+      <app-skeleton-item class="rounded h-4 w-full" />
+    </td>
+    <td class="py-2 px-6">
+      <app-skeleton-item class="rounded h-4 w-full" />
+    </td>
+    <td class="py-2 px-6">
+      <app-skeleton-item class="rounded h-4 w-full" />
+    </td>
+    <td class="py-2 px-6">
+      <app-skeleton-item class="rounded h-4 w-full" />
+    </td>
+    <td class="py-2 px-6">
+      <app-skeleton-item class="rounded h-4 w-full" />
+    </td>
+    <td class="py-2 px-6">
+      <app-skeleton-item class="rounded h-4 w-full" />
+    </td>
+  </tr>
+</ng-template>

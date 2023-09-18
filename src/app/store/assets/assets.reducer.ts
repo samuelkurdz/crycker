@@ -18,22 +18,23 @@ export interface CryptoAsset {
 	data_trade_end?: string;
 	data_trade_start?: string;
 	id_icon?: string;
-	price_usd?: string;
+	price_usd?: number;
+	isFav?: boolean
 }
 
 export interface Assets {
-	favorites: string[];
-	currencies: CryptoAsset[];
+	cryptoAssets: CryptoAsset[];
+	favoriteAssets: CryptoAsset[];
 	isFirstTimeVisit: boolean;
 	isLoadingAssets: boolean;
 }
 
 
 const initialState: Assets = {
-	favorites: [],
-	currencies: [],
+	cryptoAssets: [],
 	isFirstTimeVisit: true,
 	isLoadingAssets: false,
+	favoriteAssets: [],
 };
 
 export const assetsReducer = createReducer(
@@ -49,8 +50,29 @@ export const assetsReducer = createReducer(
 	on(assetsActions.cryptoAssetsLoaded, (state, { payload }) => {
 		return {
 			...state,
-			currencies: payload,
+			cryptoAssets: payload,
 			isLoadingAssets: false
+		};
+	}),
+
+	on(assetsActions.assetsLoadedFailure, (state) => {
+		return {
+			...state,
+			isLoadingAssets: false
+		};
+	}),
+
+	on(assetsActions.toggleAssetFavStatus, (state, { asset }) => {
+		return {
+			...state,
+			favoriteAssets: state.favoriteAssets.some((queryAsset) => queryAsset.asset_id === asset.asset_id) ?
+				state.favoriteAssets.filter(el => el.asset_id !== asset.asset_id) :
+				[...state.favoriteAssets, { ...asset, isFav: true }],
+			cryptoAssets: state.cryptoAssets.map((cryAsset) => (
+				cryAsset.asset_id === asset.asset_id ?
+					{ ...cryAsset, isFav: !cryAsset.isFav } :
+					cryAsset
+			))
 		};
 	}),
 
