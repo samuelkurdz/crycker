@@ -13,10 +13,10 @@ import { provideAnimations } from '@angular/platform-browser/animations'
 
 export const appConfig: ApplicationConfig = {
 	providers: [
-    provideRouter(routes),
-    provideStore(reducers, { metaReducers }),
-    provideEffects(assetsEffects),
-    provideHttpClient(withInterceptors([headerInterceptor])),
-    provideAnimations()
-]
+		provideRouter(routes),
+		provideStore(reducers, { metaReducers }),
+		provideEffects(assetsEffects),
+		provideHttpClient(withInterceptors([headerInterceptor])),
+		provideAnimations()
+	]
 };

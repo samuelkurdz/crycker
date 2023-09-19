@@ -1,9 +1,9 @@
 import { ActionReducer, MetaReducer, ActionReducerMap } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
-import { assetsReducer, Assets } from './assets/assets.reducer';
+import { assetsReducer, AssetState } from './assets/assets.reducer';
 
 export interface AppState {
-	assets: Assets;
+	assets: AssetState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {

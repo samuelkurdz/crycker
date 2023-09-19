@@ -1,27 +1,4 @@
-<nav
-  class="w-screen fixed bg-transparent top-4 left-0 flex justify-center items-center"
->
-  <div class="border rounded-lg py-2.5 px-4 flex items-center gap-10">
-    <h2 class="uppercase font-bold text-green-700">Crycker</h2>
-    <div class="flex items-center gap-5">
-      <a
-        routerLink=""
-        routerLinkActive="text-blue-500 underline underline-offset-4"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="text-sm hover:text-blue-500 transition-all"
-      >
-        Home
-      </a>
-      <a
-        routerLink="favourites"
-        routerLinkActive="text-blue-500 underline underline-offset-4"
-        class="text-sm hover:text-blue-500 transition-all"
-      >
-        Favourites
-      </a>
-    </div>
-  </div>
-</nav>
+<app-navbar />
 
 <main class="mt-20 px-4 lg:px-10">
   <router-outlet />
