@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { HomeComponent } from './home.component';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { Action } from '@ngrx/store';
@@ -62,11 +60,8 @@ describe('HomeComponent', () => {
 		TestBed.configureTestingModule({
 			imports: [HomeComponent],
 			providers: [
-				provideHttpClient(),
-				provideHttpClientTesting(),
 				provideRouter([]),
 				provideAnimations(),
-
 				provideMockStore({
 					initialState: {
 						assets: {
@@ -102,11 +97,11 @@ describe('HomeComponent', () => {
 				isLoadingAssets: true,
 				favoriteAssets: [],
 			}
-    });
+		});
 		fixture.detectChanges();
 		const loadingSkeleton = fixture.debugElement.nativeElement.querySelector(
-      'app-skeleton-item'
-    );
+			'app-skeleton-item'
+		);
 		expect(loadingSkeleton).toBeTruthy();
 	});
 
@@ -118,7 +113,7 @@ describe('HomeComponent', () => {
 				isLoadingAssets: false,
 				favoriteAssets: [],
 			}
-    });
+		});
 		fixture.detectChanges();
 		expect(component.assets().length).toBe(2);
 	});
@@ -131,32 +126,10 @@ describe('HomeComponent', () => {
 				isLoadingAssets: false,
 				favoriteAssets: [],
 			}
-    });
+		});
 		fixture.detectChanges();
-		
+
 		const tableRows = fixture.debugElement.nativeElement.querySelectorAll('.mdc-data-table__row');
 		expect(tableRows.length).toEqual(2);
 	});
-
-	// it('should filter assets by the input search field', async () => {
-	// 	store.setState({
-	// 		assets: {
-	// 			cryptoAssets: mockAssets,
-	// 			isFirstTimeVisit: true,
-	// 			isLoadingAssets: false,
-	// 			favoriteAssets: [],
-	// 		}
-  //   });
-
-  //   fixture.detectChanges();
-  //   const inputElement = fixture.debugElement.nativeElement.querySelector(
-  //     '#filter'
-  //   );
-  //   inputElement.value = 'bitcoin';
-  //   inputElement.dispatchEvent(new Event('input'));
-  //   fixture.detectChanges();
-
-	// 	const tableRows = fixture.debugElement.nativeElement.querySelectorAll('.mdc-data-table__row');
-	// 	expect(tableRows.length).toEqual(1);
-  // });
 });
