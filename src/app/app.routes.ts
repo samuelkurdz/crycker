@@ -9,5 +9,10 @@ export const routes: Routes = [
 		path: 'favourites',
 		loadComponent: () =>
 			import('./favourites/favourites.component').then(com => com.FavouritesComponent)
-	}
+	},
+	{
+		path: '**',
+		pathMatch: 'full',
+		redirectTo: 'assets'
+	},
 ];
