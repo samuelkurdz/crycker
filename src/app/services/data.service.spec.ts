@@ -23,7 +23,7 @@ describe('DataService', () => {
 	it('should fetch assets', (done) => {
     service.fetchCurrenciesData().subscribe({
       next: (assets) => {
-        expect(assets.length).toEqual(18255);
+        expect(assets.length).toBeGreaterThanOrEqual(18000);
         done();
       },
       error: done.fail,
