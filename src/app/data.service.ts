@@ -4,13 +4,13 @@ import { environment } from 'src/environments/environment';
 import { CryptoAsset } from './store/assets/assets.reducer';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class DataService {
 	private http = inject(HttpClient);
-	private  APIURL =  environment.APIURL;
+	private APIURL = environment.APIURL;
 
-  constructor() { }
+	constructor() { }
 
 	fetchCurrenciesData() {
 		return this.http.get<CryptoAsset[]>(`${this.APIURL}/assets`)

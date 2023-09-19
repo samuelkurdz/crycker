@@ -1,11 +1,4 @@
-// import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-import {
-	StoreModule,
-	ActionReducer,
-	MetaReducer,
-	ActionReducerMap,
-} from '@ngrx/store';
+import { ActionReducer, MetaReducer, ActionReducerMap } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { assetsReducer, Assets } from './assets/assets.reducer';
 

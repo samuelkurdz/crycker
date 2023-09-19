@@ -12,7 +12,7 @@ import { fetchAssets } from './store/assets/assets.actions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  _store = inject(Store);
+  private _store = inject(Store);
 
 	ngOnInit(): void {
 		this._store.dispatch(fetchAssets());

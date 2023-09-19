@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import * as assetsActions from './assets.actions';
 
 export interface CryptoAsset {
@@ -36,6 +36,58 @@ const initialState: Assets = {
 	isLoadingAssets: false,
 	favoriteAssets: [],
 };
+
+// export const assetsReducer = createFeature({
+// 	name: 'assets',
+// 	reducer: createReducer(
+// 		initialState,
+
+// 		on(assetsActions.fetchAssets, (state) => {
+// 			return {
+// 				...state,
+// 				isLoadingAssets: true
+// 			};
+// 		}),
+
+// 		on(assetsActions.cryptoAssetsLoaded, (state, { payload }) => {
+// 			return {
+// 				...state,
+// 				cryptoAssets: payload,
+// 				isLoadingAssets: false
+// 			};
+// 		}),
+
+// 		on(assetsActions.assetsLoadedFailure, (state) => {
+// 			return {
+// 				...state,
+// 				isLoadingAssets: false
+// 			};
+// 		}),
+
+// 		on(assetsActions.toggleAssetFavStatus, (state, { asset }) => {
+// 			return {
+// 				...state,
+// 				favoriteAssets: state.favoriteAssets.some((queryAsset) => queryAsset.asset_id === asset.asset_id) ?
+// 					state.favoriteAssets.filter(el => el.asset_id !== asset.asset_id) :
+// 					[...state.favoriteAssets, { ...asset, isFav: true }],
+// 				cryptoAssets: state.cryptoAssets.map((cryAsset) => (
+// 					cryAsset.asset_id === asset.asset_id ?
+// 						{ ...cryAsset, isFav: !cryAsset.isFav } :
+// 						cryAsset
+// 				))
+// 			};
+// 		}),
+
+// 		on(assetsActions.hasVisited, (state) => {
+// 			return {
+// 				...state,
+// 				isFirstTimeVisit: false,
+// 			};
+// 		}),
+// 	)
+
+// })
+
 
 export const assetsReducer = createReducer(
 	initialState,

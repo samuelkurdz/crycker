@@ -11,7 +11,7 @@ import { selectFavouriteAssets } from '../store/assets/assets.selectors';
   templateUrl: './favourites.component.html',
   styleUrls: ['./favourites.component.scss']
 })
-export default class FavouritesComponent {
-	_store = inject(Store);
+export class FavouritesComponent {
+	private _store = inject(Store);
 	favAssets = this._store.selectSignal(selectFavouriteAssets);
 }

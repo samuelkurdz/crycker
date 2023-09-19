@@ -15,13 +15,12 @@ import { AssetsTableComponent } from '../components/assets-table/assets-table.co
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.scss']
 })
-export default class HomeComponent implements OnInit, OnDestroy {
-	_store = inject(Store);
+export class HomeComponent implements OnInit, OnDestroy {
+	private _store = inject(Store);
+	private onDestroyRef$ = new Subject<void>();
+
 	assets = this._store.selectSignal(selectAssets);
-	private readonly onDestroyRef$ = new Subject<void>();
 	isAssetsLoading = this._store.selectSignal(selectIsAssetsLoading);
-
-
 	filterInputControl: FormControl<string> = new FormControl();
 	displayedColumns = ['fav', 'name', 'volume_1hrs_usd', 'volume_1day_usd', 'volume_1mth_usd', 'price_usd'];
 
@@ -29,7 +28,7 @@ export default class HomeComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.filterInputControl.valueChanges
 			.pipe(
-				debounceTime(2000),
+				debounceTime(400),
 				distinctUntilChanged(),
 				concatLatestFrom(() => this._store.select(selectAssets)),
 				takeUntil(this.onDestroyRef$),
